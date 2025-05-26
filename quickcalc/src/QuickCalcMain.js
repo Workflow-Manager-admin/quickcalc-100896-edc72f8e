@@ -56,6 +56,13 @@ function QuickCalcMain() {
   function performOperation(op) {
     if (error) return;
     const inputValue = parseFloat(display);
+
+    // If user presses multiple operators in a row, just update the pendingOperator
+    if (waitingForOperand) {
+      setPendingOperator(op);
+      return;
+    }
+
     if (accumulator == null) {
       setAccumulator(inputValue);
     } else if (pendingOperator) {
